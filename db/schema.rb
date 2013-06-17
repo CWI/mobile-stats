@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20130616221454) do
 
   create_table "stat_data", :force => true do |t|
     t.string   "event_name"
-    t.string   "id_address"
+    t.string   "ip_address"
     t.string   "user_agent"
     t.string   "plataform"
     t.string   "browser"
