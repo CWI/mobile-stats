@@ -37,7 +37,7 @@ setStatus = function(status, level)
     send_status.html(status)
 };
 
-setStatus('Getting device info', 'info');
+setStatus('Obtaining device info', 'info');
 
 $.ajax({
     type: 'POST',
@@ -46,9 +46,7 @@ $.ajax({
     }
 }).done(function(data)
 {
-    console.log(data);
     setStatus('Device info sent successfully', 'success');
 }).fail(function(data){
-    console.log(data);
     setStatus('Failed sending your device info', 'fail');
 });
