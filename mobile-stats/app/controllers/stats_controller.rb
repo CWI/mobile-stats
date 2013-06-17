@@ -27,6 +27,7 @@ class StatsController < ApplicationController
     if request.post?
       @stat_data = StatData.new(params[:device_data])
       @stat_data.event_name = params[:event_name]
+      @stat_data.ip_address = request.remote_ip
 
       if @stat_data.save
         message = {message: 'Success'}
