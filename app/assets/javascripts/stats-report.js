@@ -74,7 +74,8 @@ MOBILE_STATS.REPORT = {
       }
 
     MOBILE_STATS.REPORT.chart.Doughnut(chart_data, {
-      segmentStrokeColor: '#000'
+      segmentStrokeColor: '#000',
+      animation: false
     });
   },
 
