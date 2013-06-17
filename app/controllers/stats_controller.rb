@@ -28,7 +28,7 @@ class StatsController < ApplicationController
       @stat_data = StatData.new(params[:device_data])
       @stat_data.event_name = params[:event_name]
       @stat_data.ip_address = request.remote_ip
-	  
+    
       render :json => {message: _saveStatData}
     end
   end
@@ -36,18 +36,18 @@ class StatsController < ApplicationController
   private
 
   def _saveStatData
-	all_events = {}
+  all_events = {}
     if cookies[:sent_count_stats]
-	  all_events = Marshal.load(cookies[:sent_count_stats]) 
+    all_events = Marshal.load(cookies[:sent_count_stats]) 
     end
     
     message = 'fail'
     if all_events and all_events[params[:event_name]]
-  	  message = 'duplicated'
+      message = 'duplicated'
     elsif @stat_data.save
-	  all_events = all_events.merge!({params[:event_name] => true}) { |key, v1, v2| v1 }
-	  message = 'success'
-	end
+      all_events = all_events.merge!({params[:event_name] => true}) { |key, v1, v2| v1 }
+      message = 'success'
+    end
   
     cookies[:sent_count_stats] = { :value => Marshal.dump(all_events), :expires => 1.hour.from_now }
     return message;
