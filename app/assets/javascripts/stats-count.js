@@ -3,7 +3,7 @@ if(!MOBILE_STATS)
 	
 MOBILE_STATS.COUNT = {	
 	containers: {},	
-	status: {fail: 'fail', sucess: 'success', info: 'info'},	
+	status: {fail: 'fail', success: 'success', info: 'info'},	
 
 	init: function() {
 		MOBILE_STATS.COUNT.getContaineirs();
@@ -22,7 +22,7 @@ MOBILE_STATS.COUNT = {
 			browser: window.navigator.appCodeName,
 			vendor: window.navigator.vendor,
 			pixel_ratio: window.devicePixelRatio,
-			resolution: screen.height + 'x' +  screen.width,
+			resolution: screen.width + 'x' +  screen.height,
 			language: window.navigator.language
 		}
 	},
@@ -37,15 +37,15 @@ MOBILE_STATS.COUNT = {
 		{
 			switch(level)
 			{
-				case 'success': 
+				case MOBILE_STATS.COUNT.status.success: 
 					MOBILE_STATS.COUNT.containers.sendStatus.addClass('label-success');
 					break;
 
-				case 'info': 
+				case MOBILE_STATS.COUNT.status.info: 
 					MOBILE_STATS.COUNT.containers.sendStatus.addClass('label-info');
 					break;
 
-				case 'fail': 
+				case MOBILE_STATS.COUNT.status.fail: 
 					MOBILE_STATS.COUNT.containers.sendStatus.addClass('label-important');
 					break;
 			}
@@ -59,15 +59,15 @@ MOBILE_STATS.COUNT = {
 		switch(key)
 		{
 			case 'success':		
-				MOBILE_STATS.COUNT.setStatus('Device info sent successfully', MOBILE_STATS.COUNT.status.success);	
+				MOBILE_STATS.COUNT.setStatus('Device info sent successfully', MOBILE_STATS.COUNT.status.success);
 				break;
 				
 			case 'fail':		
-				MOBILE_STATS.COUNT.setStatus('Failed sending your device info', MOBILE_STATS.COUNT.status.fail);	
+				MOBILE_STATS.COUNT.setStatus('Failed sending your device info', MOBILE_STATS.COUNT.status.fail);
 				break;			
 				
 			case 'duplicated':		
-				MOBILE_STATS.COUNT.setStatus('yet sent device infos', MOBILE_STATS.COUNT.status.info);	
+				MOBILE_STATS.COUNT.setStatus('Device info already sent to server', MOBILE_STATS.COUNT.status.info);
 				break;			
 		}
 	},
