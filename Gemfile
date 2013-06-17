@@ -15,7 +15,11 @@ end
 
 gem 'jquery-rails'
 
-gem 'sass-rails', '~> 3.2'
+group :assets do
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'uglifier', '>= 1.0.3'
+end
+
 gem 'bootstrap-sass', '~> 2.3.2.0'
 
 # To use ActiveModel has_secure_password
