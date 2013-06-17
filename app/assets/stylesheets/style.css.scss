@@ -26,11 +26,16 @@ body
   padding: 30px 0;
   margin-top: 70px;
   border-top: 1px dotted #FFB240;
-  background-color: #000000;
+  background-color: #000;
 }
 
 .navbar p {
-  color: #CCCCCC;
+  color: #ccc;
   font-size: 12px;
   text-align: center;
+}
+
+.well
+{
+  color: #333;
 }
