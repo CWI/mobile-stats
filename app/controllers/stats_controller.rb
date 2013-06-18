@@ -25,7 +25,7 @@ class StatsController < ApplicationController
     total_records = 0
 
     @stat_data.each do |i|
-      total_records += i.total_stats
+      total_records += Integer(i.total_stats)
     end
 
     @stat_data = @stat_data.collect do |i|
