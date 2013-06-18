@@ -8,7 +8,7 @@ MOBILE_STATS.REPORT = {
 
   pulling_rate: 10000,
 
-  table_line_template: '<tr><td>{desc}</td><td>{qty}</td><td>{perc}%</td></tr>',
+  table_line_template: '<tr><td><span class="label" style="background-color: {color};">{desc}</span></td><td>{qty}</td><td>{perc}%</td></tr>',
 
   init: function() {
     MOBILE_STATS.REPORT.getContaineirs();
@@ -49,13 +49,16 @@ MOBILE_STATS.REPORT = {
   },
 
   setTableData: function(data) {
+    MOBILE_STATS.REPORT.restartColors();
+
     var tbody = '';
 
     for(var i = 0; i < data.length; i++)
       tbody += MOBILE_STATS.REPORT.table_line_template
         .replace('{desc}', data[i].property_value)
         .replace('{qty}', data[i].total_stats)
-        .replace('{perc}', data[i].perc);
+        .replace('{perc}', data[i].perc)
+        .replace('{color}', MOBILE_STATS.REPORT.getChartColor());
 
     MOBILE_STATS.REPORT.containers.table_body.html(tbody);
   },
