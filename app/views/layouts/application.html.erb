@@ -56,7 +56,7 @@
       </div>
     </div>
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "controllers/" + params[:controller] if File.exists?("#{Rails.root}/app/assets/javascripts/controllers/#{params[:controller]}.js") %>
-    <%= javascript_include_tag "controllers/" + params[:controller] + "/" + params[:action] if File.exists?("#{Rails.root}/app/assets/javascripts/controllers/#{params[:controller]}/#{params[:action]}.js") %>
+    <%= javascript_include_tag params[:controller] if File.exists?("#{Rails.root}/app/assets/javascripts/#{params[:controller]}.js") %>
+    <%= javascript_include_tag params[:controller] + "-" + params[:action] if File.exists?("#{Rails.root}/app/assets/javascripts/#{params[:controller]}-#{params[:action]}.js") %>
   </body>
 </html>
