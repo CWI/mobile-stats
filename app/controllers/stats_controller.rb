@@ -1,5 +1,7 @@
 class StatsController < ApplicationController
 
+  layout :resolve_layout
+
   def index
     if params[:event_name]
       redirect_to report_url params[:event_name]
@@ -52,5 +54,16 @@ class StatsController < ApplicationController
     cookies[:sent_count_stats] = { :value => Marshal.dump(all_events), :expires => 1.hour.from_now }
     return message;
   end 
+
+  private
+
+  def resolve_layout
+    case action_name
+    when "report"
+      "clean"
+    else
+      "application"
+    end
+  end
 
 end

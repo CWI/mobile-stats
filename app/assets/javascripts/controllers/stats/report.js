@@ -34,7 +34,7 @@ MOBILE_STATS.REPORT = {
     //Get context with jQuery - using jQuery's .get() method.
     var chart_canvas = $("#chart");
 
-    var calculated_height = Math.max($('body').height(), $(window).height()) - MOBILE_STATS.REPORT.containers.chart_container.offset().top - 60;
+    var calculated_height = Math.max($('body').height(), $(window).height()) - MOBILE_STATS.REPORT.containers.chart_container.offset().top - 40;
 
     if (calculated_height < 100)
       calculated_height = MOBILE_STATS.REPORT.containers.chart_container.width();
