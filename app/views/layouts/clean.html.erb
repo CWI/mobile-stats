@@ -15,6 +15,12 @@
    <![endif]-->
   </head>
   <body>
+    <% if flash[:error] %>
+      <div class="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Warning!</strong> <%= flash[:error] %>.
+      </div>
+    <% end %>
     <div class="container-fluid fill">
       <div class="row-fluid">
         <div class="span12">
