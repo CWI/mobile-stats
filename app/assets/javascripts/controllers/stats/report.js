@@ -8,7 +8,7 @@ MOBILE_STATS.REPORT = {
 
   pulling_rate: 10000,
 
-  table_line_template: '<tr><td>{desc}</td><td>{qty}</td><td>{perc}</td></tr>',
+  table_line_template: '<tr><td>{desc}</td><td>{qty}</td><td>{perc}%</td></tr>',
 
   init: function() {
     MOBILE_STATS.REPORT.getContaineirs();
@@ -53,8 +53,9 @@ MOBILE_STATS.REPORT = {
 
     for(var i = 0; i < data.length; i++)
       tbody += MOBILE_STATS.REPORT.table_line_template
-        .replace('{desc}', data[i].resolution)
-        .replace('{qty}', data[i].total_stats);
+        .replace('{desc}', data[i].property_value)
+        .replace('{qty}', data[i].total_stats)
+        .replace('{perc}', data[i].perc);
 
     MOBILE_STATS.REPORT.containers.table_body.html(tbody);
   },
