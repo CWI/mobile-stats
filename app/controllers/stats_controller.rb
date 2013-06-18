@@ -4,8 +4,8 @@ class StatsController < ApplicationController
 
   def index
     if params[:event_name]
-      slug = params[:event_name].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-      redirect_to report_url slug, 'vendor'
+      slug_string = slug params[:event_name]
+      redirect_to report_url slug_string, 'vendor'
     end
   end
 
@@ -50,6 +50,18 @@ class StatsController < ApplicationController
     end
   end
 
+  def clear
+    if params[:event_name_delete]
+      event_name_delete = slug params[:event_name_delete]
+      if event_name_delete == params[:event_name]
+        StatData.delete_all(['event_name = ?', event_name_delete])
+        redirect_to report_url event_name_delete, 'vendor'
+      else
+        flash[:error] = "Você digitou o nome incorreto."
+      end
+    end
+  end
+
   private
 
   def _saveStatData
@@ -79,4 +91,7 @@ class StatsController < ApplicationController
     end
   end
 
+  def slug(string)
+    string.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+  end
 end
