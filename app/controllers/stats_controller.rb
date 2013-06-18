@@ -4,7 +4,8 @@ class StatsController < ApplicationController
 
   def index
     if params[:event_name]
-      redirect_to report_url params[:event_name], 'vendor'
+      slug = params[:event_name].downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
+      redirect_to report_url slug, 'vendor'
     end
   end
 
@@ -68,8 +69,6 @@ class StatsController < ApplicationController
     cookies[:sent_count_stats] = { :value => Marshal.dump(all_events), :expires => 1.hour.from_now }
     return message;
   end 
-
-  private
 
   def resolve_layout
     case action_name
