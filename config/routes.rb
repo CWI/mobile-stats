@@ -5,4 +5,5 @@ MobileStats::Application.routes.draw do
   match ':event_name/report/:property/data' => 'stats#report_data', :as => :report_data
   match ':event_name/qrcode' => 'stats#qrcode', :as => :qrcode
   match ':event_name/countme' => 'stats#count', :as => :count
+  match ':event_name/clear-this-mess' => 'stats#clear', :as => :clear
 end
