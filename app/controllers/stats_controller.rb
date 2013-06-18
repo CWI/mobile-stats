@@ -33,7 +33,7 @@ class StatsController < ApplicationController
       i
     end
 
-    render :json => @stat_data.map { |stats| {:total_stats => stats.total_stats, :perc => stats.perc, :property_value => stats.property_value} }
+    render :json => @stat_data.map { |stats| {:total_stats => Integer(stats.total_stats), :perc => stats.perc, :property_value => stats.property_value} }
   end
 
   def qrcode
