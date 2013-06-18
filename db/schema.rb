@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130616221454) do
+ActiveRecord::Schema.define(:version => 20130617230539) do
 
   create_table "stat_data", :force => true do |t|
     t.string   "event_name"
     t.string   "ip_address"
     t.string   "user_agent"
-    t.string   "plataform"
+    t.string   "platform"
     t.string   "browser"
     t.string   "vendor"
     t.string   "pixel_ratio"
