@@ -17,12 +17,23 @@ class StatsController < ApplicationController
 
   def report_data
     property = params[:property]
-    @stat_data = StatData.select("count(*) as total_stats, #{property}")
+    @stat_data = StatData.select("count(*) as total_stats, #{property} as property_value")
       .where('event_name = ?', params[:event_name])
       .group(property)
       .order('total_stats desc')
 
-    render :json => @stat_data
+    total_records = 0
+
+    @stat_data.each do |i|
+      total_records += i.total_stats
+    end
+
+    @stat_data = @stat_data.collect do |i|
+      i.perc = ((i.total_stats.to_f / total_records.to_f) * 100.0).round
+      i
+    end
+
+    render :json => @stat_data.map { |stats| {:total_stats => stats.total_stats, :perc => stats.perc, :property_value => stats.property_value} }
   end
 
   def qrcode
