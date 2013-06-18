@@ -22,8 +22,7 @@ MOBILE_STATS.REPORT = {
   },
 
   getReportOption: function() {
-    // TODO
-    return 'resolution';
+    return $('#property_name').val();
   },
 
   startPulling: function() {
@@ -34,7 +33,7 @@ MOBILE_STATS.REPORT = {
     //Get context with jQuery - using jQuery's .get() method.
     var chart_canvas = $("#chart");
 
-    var calculated_height = Math.max($('body').height(), $(window).height()) - MOBILE_STATS.REPORT.containers.chart_container.offset().top - 40;
+    var calculated_height = Math.max($('body').height(), $(window).height()) - MOBILE_STATS.REPORT.containers.chart_container.offset().top - 60;
 
     if (calculated_height < 100)
       calculated_height = MOBILE_STATS.REPORT.containers.chart_container.width();
@@ -96,7 +95,7 @@ MOBILE_STATS.REPORT = {
 
   pullContent: function() {
     $.ajax({
-      url: 'report/data/' +  MOBILE_STATS.REPORT.getReportOption(),
+      url: MOBILE_STATS.REPORT.getReportOption() + '/data',
       dataType: 'json'
     }).done(function(data)
     {

@@ -4,12 +4,15 @@ class StatsController < ApplicationController
 
   def index
     if params[:event_name]
-      redirect_to report_url params[:event_name]
+      redirect_to report_url params[:event_name], 'vendor'
     end
   end
 
-  def report
+  def report_redirect
+    redirect_to report_url params[:event_name], 'vendor'
+  end
 
+  def report
   end
 
   def report_data
