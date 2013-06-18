@@ -8,9 +8,7 @@ MOBILE_STATS.REPORT = {
 
   pulling_rate: 10000,
 
-  table_line_template: '<tr><td>{desc}</td><td>{qty}</td><td>{perc}</td></tr>',
-
-  chart_colors: ["#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "#4D5360"],
+  table_line_template: '<tr><td>{desc}</td><td>{qty}</td><td>{perc}%</td></tr>',
 
   init: function() {
     MOBILE_STATS.REPORT.getContaineirs();
@@ -24,8 +22,7 @@ MOBILE_STATS.REPORT = {
   },
 
   getReportOption: function() {
-    // TODO
-    return 'resolution';
+    return $('#property_name').val();
   },
 
   startPulling: function() {
@@ -39,9 +36,7 @@ MOBILE_STATS.REPORT = {
     var calculated_height = Math.max($('body').height(), $(window).height()) - MOBILE_STATS.REPORT.containers.chart_container.offset().top - 60;
 
     if (calculated_height < 100)
-    {
       calculated_height = MOBILE_STATS.REPORT.containers.chart_container.width();
-    }
 
     MOBILE_STATS.REPORT.containers.chart_container.height(calculated_height);
 
@@ -58,30 +53,50 @@ MOBILE_STATS.REPORT = {
 
     for(var i = 0; i < data.length; i++)
       tbody += MOBILE_STATS.REPORT.table_line_template
-        .replace('{desc}', data[i].resolution)
-        .replace('{qty}', data[i].total_stats);
+        .replace('{desc}', data[i].property_value)
+        .replace('{qty}', data[i].total_stats)
+        .replace('{perc}', data[i].perc);
 
     MOBILE_STATS.REPORT.containers.table_body.html(tbody);
   },
 
   setChartData: function(data) {
+    MOBILE_STATS.REPORT.restartColors();
+
     var chart_data = [];
 
     for(var i = 0; i < data.length; i++)
       chart_data[chart_data.length] = {
         value: data[i].total_stats,
-        color: MOBILE_STATS.REPORT.chart_colors[i] // TODO: lista circular... gerar cores?
+        color: MOBILE_STATS.REPORT.getChartColor()
       }
 
     MOBILE_STATS.REPORT.chart.Doughnut(chart_data, {
-      segmentStrokeColor: '#000',
+      segmentShowStroke: false,
       animation: false
     });
   },
 
+  restartColors: function() {
+    MOBILE_STATS.REPORT.chartColorIndex = 0;
+  },
+
+  getChartColor: function() {
+    var chart_colors = ["#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "#4D5360"];
+
+    if ((MOBILE_STATS.REPORT.chartColorIndex == undefined) || (MOBILE_STATS.REPORT.chartColorIndex >= chart_colors.length))
+      MOBILE_STATS.REPORT.chartColorIndex = 0;
+
+    return_color = chart_colors[MOBILE_STATS.REPORT.chartColorIndex];
+
+    MOBILE_STATS.REPORT.chartColorIndex++;    
+
+    return return_color;
+  },
+
   pullContent: function() {
     $.ajax({
-      url: 'report/data/' +  MOBILE_STATS.REPORT.getReportOption(),
+      url: MOBILE_STATS.REPORT.getReportOption() + '/data',
       dataType: 'json'
     }).done(function(data)
     {
