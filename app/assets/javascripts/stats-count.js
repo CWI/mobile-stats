@@ -18,7 +18,7 @@ MOBILE_STATS.COUNT = {
 	{
 		return {
 			user_agent: window.navigator.userAgent,
-			plataform: window.navigator.platform,
+			platform: window.navigator.platform,
 			browser: window.navigator.appCodeName,
 			vendor: window.navigator.vendor,
 			pixel_ratio: window.devicePixelRatio,
