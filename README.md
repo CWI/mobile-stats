@@ -4,7 +4,7 @@ App used for live mobile stats generation and presentation
 
 # setup
 
-1. After forking, make sure to install `ruby-1.9.3-p429`:
+1. After [forking](https://github.com/CWI/mobile-stats/fork), make sure to install `ruby-1.9.3-p429`:
   
   `rvm install ruby-1.9.3-p429`
 
