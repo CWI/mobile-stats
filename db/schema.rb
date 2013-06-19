@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617230539) do
+ActiveRecord::Schema.define(:version => 20130618203226) do
 
   create_table "stat_data", :force => true do |t|
     t.string   "event_name"
@@ -23,8 +23,10 @@ ActiveRecord::Schema.define(:version => 20130617230539) do
     t.string   "pixel_ratio"
     t.string   "resolution"
     t.string   "language"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "iphone_version"
+    t.string   "android_version"
   end
 
 end

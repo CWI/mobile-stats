@@ -1,19 +1,39 @@
 if(!MOBILE_STATS)
 	var MOBILE_STATS={};
-	
-MOBILE_STATS.COUNT = {	
-	containers: {},	
-	status: {fail: 'fail', success: 'success', info: 'info'},	
+
+MOBILE_STATS.COUNT = {
+	containers: {},
+	status: {fail: 'fail', success: 'success', info: 'info'},
 
 	init: function() {
 		MOBILE_STATS.COUNT.getContaineirs();
-	},	
-	
+	},
+
 	getContaineirs: function() {
 		MOBILE_STATS.COUNT.containers.sendStatus = $('#send-status');
 		MOBILE_STATS.COUNT.containers.deviceData = MOBILE_STATS.COUNT.getDeviceData();
-	},	
-	
+	},
+
+	getIphoneVersion: function(user_agent)
+	{
+		pattern = /iPhone OS ([\d_]+)/;
+
+		if (pattern.test(user_agent))
+			return user_agent.match(pattern)[1].replace('_', '.')
+		else
+			return null
+	},
+
+	getAndroidVersion: function(user_agent)
+	{
+		pattern = /Android ([\d.]+);/;
+
+		if (pattern.test(user_agent))
+			return user_agent.match(pattern)[1]
+		else
+			return null
+	},
+
 	getDeviceData: function()
 	{
 		return {
@@ -23,7 +43,10 @@ MOBILE_STATS.COUNT = {
 			vendor: window.navigator.vendor,
 			pixel_ratio: window.devicePixelRatio,
 			resolution: screen.width + 'x' +  screen.height,
-			language: window.navigator.language
+                        // lower case to avoid different stats for the same language
+			language: window.navigator.language.toLowerCase()
+			iphone_version: MOBILE_STATS.COUNT.getIphoneVersion(window.navigator.userAgent),
+			android_version: MOBILE_STATS.COUNT.getAndroidVersion(window.navigator.userAgent)
 		}
 	},
 
@@ -37,15 +60,15 @@ MOBILE_STATS.COUNT = {
 		{
 			switch(level)
 			{
-				case MOBILE_STATS.COUNT.status.success: 
+				case MOBILE_STATS.COUNT.status.success:
 					MOBILE_STATS.COUNT.containers.sendStatus.addClass('label-success');
 					break;
 
-				case MOBILE_STATS.COUNT.status.info: 
+				case MOBILE_STATS.COUNT.status.info:
 					MOBILE_STATS.COUNT.containers.sendStatus.addClass('label-info');
 					break;
 
-				case MOBILE_STATS.COUNT.status.fail: 
+				case MOBILE_STATS.COUNT.status.fail:
 					MOBILE_STATS.COUNT.containers.sendStatus.addClass('label-important');
 					break;
 			}
@@ -58,20 +81,20 @@ MOBILE_STATS.COUNT = {
 	{
 		switch(key)
 		{
-			case 'success':		
+			case 'success':
 				MOBILE_STATS.COUNT.setStatus('Device info sent successfully', MOBILE_STATS.COUNT.status.success);
 				break;
-				
-			case 'fail':		
+
+			case 'fail':
 				MOBILE_STATS.COUNT.setStatus('Failed sending your device info', MOBILE_STATS.COUNT.status.fail);
-				break;			
-				
-			case 'duplicated':		
+				break;
+
+			case 'duplicated':
 				MOBILE_STATS.COUNT.setStatus('Device info already sent to server', MOBILE_STATS.COUNT.status.info);
-				break;			
+				break;
 		}
 	},
-	
+
 	sendDeviceInfos: function()
 	{
 		$.ajax({
@@ -85,7 +108,7 @@ MOBILE_STATS.COUNT = {
 		}).fail(function(data)
 		{
 			MOBILE_STATS.COUNT.setStatusMessage('fail');
-		});	
+		});
 	}
 };
 
