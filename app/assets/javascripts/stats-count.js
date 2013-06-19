@@ -14,6 +14,26 @@ MOBILE_STATS.COUNT = {
 		MOBILE_STATS.COUNT.containers.deviceData = MOBILE_STATS.COUNT.getDeviceData();
 	},	
 	
+	getIphoneVersion: function(user_agent)
+	{
+		pattern = /iPhone OS ([\d_]+)/;
+
+		if (pattern.test(user_agent))
+			return user_agent.match(pattern)[1].replace('_', '.')
+		else
+			return null
+	},
+
+	getAndroidVersion: function(user_agent)
+	{
+		pattern = /Android ([\d.]+);/;
+
+		if (pattern.test(user_agent))
+			return user_agent.match(pattern)[1]
+		else
+			return null
+	},
+
 	getDeviceData: function()
 	{
 		return {
@@ -23,7 +43,9 @@ MOBILE_STATS.COUNT = {
 			vendor: window.navigator.vendor,
 			pixel_ratio: window.devicePixelRatio,
 			resolution: screen.width + 'x' +  screen.height,
-			language: window.navigator.language
+			language: window.navigator.language,
+			iphone_version: MOBILE_STATS.COUNT.getIphoneVersion(window.navigator.userAgent),
+			android_version: MOBILE_STATS.COUNT.getAndroidVersion(window.navigator.userAgent)
 		}
 	},
 
