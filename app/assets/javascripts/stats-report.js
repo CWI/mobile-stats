@@ -2,9 +2,9 @@
 
 if(!MOBILE_STATS)
   var MOBILE_STATS={};
-  
-MOBILE_STATS.REPORT = {  
-  containers: {},  
+
+MOBILE_STATS.REPORT = {
+  containers: {},
 
   pulling_rate: 10000,
 
@@ -13,8 +13,8 @@ MOBILE_STATS.REPORT = {
   init: function() {
     MOBILE_STATS.REPORT.getContaineirs();
     MOBILE_STATS.REPORT.initChart();
-  },  
-  
+  },
+
   getContaineirs: function() {
     MOBILE_STATS.REPORT.containers.chart_container = $('#chart-container');
     MOBILE_STATS.REPORT.containers.table_body = $('#grid-container tbody');
@@ -82,14 +82,14 @@ MOBILE_STATS.REPORT = {
   },
 
   getChartColor: function() {
-    var chart_colors = ["#F7464A", "#E2EAE9", "#D4CCC5", "#949FB1", "#4D5360"];
+    var chart_colors = ["#FDC332", "#FD8232", "#FFD214", "#FF0418", "#FFAB00", "#868583", "#FF5A00", "#FF9900" ];
 
     if ((MOBILE_STATS.REPORT.chartColorIndex == undefined) || (MOBILE_STATS.REPORT.chartColorIndex >= chart_colors.length))
       MOBILE_STATS.REPORT.chartColorIndex = 0;
 
     return_color = chart_colors[MOBILE_STATS.REPORT.chartColorIndex];
 
-    MOBILE_STATS.REPORT.chartColorIndex++;    
+    MOBILE_STATS.REPORT.chartColorIndex++;
 
     return return_color;
   },
@@ -107,9 +107,9 @@ MOBILE_STATS.REPORT = {
     }).fail(function(data)
     {
       console.log('FAIL!', data)
-    });  
+    });
 
-    window.setTimeout(MOBILE_STATS.REPORT.pullContent, MOBILE_STATS.REPORT.pulling_rate);  
+    window.setTimeout(MOBILE_STATS.REPORT.pullContent, MOBILE_STATS.REPORT.pulling_rate);
   }
 };
 
