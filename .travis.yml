@@ -4,7 +4,7 @@ before_install:
 before_script:
   - rake db:migrate RAILS_ENV=test
 rvm:
-  - 1.9.3
+  - 1.9.2
 script: bundle exec rake
 notifications:
   email:
