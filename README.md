@@ -4,6 +4,8 @@ App used for live mobile stats generation and presentation
 
 [![Build Status](https://travis-ci.org/CWI/mobile-stats.png?branch=master)](https://travis-ci.org/CWI/mobile-stats)
 
+[![Code Climate](https://codeclimate.com/github/CWI/mobile-stats.png)](https://codeclimate.com/github/CWI/mobile-stats)
+
 # setup
 
 1. After [forking](https://github.com/CWI/mobile-stats/fork), make sure to install `ruby-1.9.3-p429`:
