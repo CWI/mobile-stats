@@ -4,8 +4,17 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+first_event:
+    event_name: My first evebt
+    ip_address: 127.0.0.1
+    user_agent: Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B)
+    platform: Linux i686
+    browser: Mozilla
+    vendor:
+    pixel_ratio: 1
+    resolution: 1366x768
+    language: pt-BR
+    iphone_version:
+    android_version: 4.0.4
+    created_at: <%= Time.now %>
+    updated_at: <%= Time.now %>
