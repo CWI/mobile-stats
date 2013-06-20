@@ -16,4 +16,5 @@ pickle-email-*.html
 .jhw-cache/
 .jhw*
 .DS_Store
-spec/reports/*
+spec/reports/*.html
+spec/reports/*.xml
