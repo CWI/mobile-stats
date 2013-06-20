@@ -39,14 +39,15 @@ class StatsController < ApplicationController
   end
 
   def qrcode
+    @qr = "#{request.protocol}#{request.host_with_port}#{count_path}"
   end
 
   def count
-    if request.post? 
+    if request.post?
       @stat_data = StatData.new(params[:device_data])
       @stat_data.event_name = params[:event_name]
       @stat_data.ip_address = request.remote_ip
-    
+
       render :json => {message: _saveStatData}
     end
   end
@@ -68,9 +69,9 @@ class StatsController < ApplicationController
   def _saveStatData
   all_events = {}
     if cookies[:sent_count_stats]
-    all_events = Marshal.load(cookies[:sent_count_stats]) 
+    all_events = Marshal.load(cookies[:sent_count_stats])
     end
-    
+
     message = 'fail'
     if all_events and all_events[params[:event_name]]
       message = 'duplicated'
@@ -78,10 +79,10 @@ class StatsController < ApplicationController
       all_events = all_events.merge!({params[:event_name] => true}) { |key, v1, v2| v1 }
       message = 'success'
     end
-  
+
     cookies[:sent_count_stats] = { :value => Marshal.dump(all_events), :expires => 1.hour.from_now }
     return message;
-  end 
+  end
 
   def resolve_layout
     case action_name
