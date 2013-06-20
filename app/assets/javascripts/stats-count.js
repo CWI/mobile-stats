@@ -43,8 +43,8 @@ MOBILE_STATS.COUNT = {
 			vendor: window.navigator.vendor,
 			pixel_ratio: window.devicePixelRatio,
 			resolution: screen.width + 'x' +  screen.height,
-                        // lower case to avoid different stats for the same language
-			language: window.navigator.language.toLowerCase()
+            // lower case to avoid different stats for the same language
+			language: window.navigator.language.toLowerCase(),
 			ios_version: MOBILE_STATS.COUNT.getIphoneVersion(window.navigator.userAgent),
 			android_version: MOBILE_STATS.COUNT.getAndroidVersion(window.navigator.userAgent)
 		}
