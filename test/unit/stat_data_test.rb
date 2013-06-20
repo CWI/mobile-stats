@@ -14,7 +14,7 @@ class StatDataTest < ActiveSupport::TestCase
 									:pixel_ratio => stat_data(:first_event).pixel_ratio,
 									:resolution => stat_data(:first_event).resolution,
 									:language => stat_data(:first_event).language,
-									:iphone_version => stat_data(:first_event).iphone_version,
+									:ios_version => stat_data(:first_event).ios_version,
 									:android_version => stat_data(:first_event).android_version)
 
 	assert first_stat_data.save
