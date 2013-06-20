@@ -14,7 +14,7 @@ first_event:
     pixel_ratio: 1
     resolution: 1366x768
     language: pt-BR
-    iphone_version:
+    ios_version:
     android_version: 4.0.4
     created_at: <%= Time.now %>
     updated_at: <%= Time.now %>
