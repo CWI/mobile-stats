@@ -45,7 +45,7 @@ MOBILE_STATS.COUNT = {
 			resolution: screen.width + 'x' +  screen.height,
                         // lower case to avoid different stats for the same language
 			language: window.navigator.language.toLowerCase()
-			iphone_version: MOBILE_STATS.COUNT.getIphoneVersion(window.navigator.userAgent),
+			ios_version: MOBILE_STATS.COUNT.getIphoneVersion(window.navigator.userAgent),
 			android_version: MOBILE_STATS.COUNT.getAndroidVersion(window.navigator.userAgent)
 		}
 	},
