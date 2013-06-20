@@ -20,11 +20,12 @@ class StatsController < ApplicationController
   def report_data
     property = params[:property]
 
-    if (property == "android_version" or property == "iphone_version")
+    if (property == "android_version" or property == "ios_version")
       # if don't have device version for android or iphone, then remove of query 
       @stat_data = StatData.select("count(*) as total_stats, #{property} as property_value")
                            .where('event_name = ?', params[:event_name])
-                           .where(property + " != null")
+                           .where(property + " is not null")
+                           .where(property + " != ''")
                            .group(property)
                            .order('total_stats desc')
     else
