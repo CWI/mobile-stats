@@ -19,9 +19,9 @@ MOBILE_STATS.COUNT = {
 		pattern = /iPhone OS ([\d_]+)/;
 
 		if (pattern.test(user_agent))
-			return user_agent.match(pattern)[1].replace('_', '.')
+			return user_agent.match(pattern)[1].replace('_', '.');
 		else
-			return null
+			return null;
 	},
 
 	getAndroidVersion: function(user_agent)
@@ -29,23 +29,28 @@ MOBILE_STATS.COUNT = {
 		pattern = /Android ([\d.]+);/;
 
 		if (pattern.test(user_agent))
-			return user_agent.match(pattern)[1]
+			return user_agent.match(pattern)[1];
 		else
-			return null
+			return null;
 	},
 
 	getDeviceData: function()
 	{
+		var pixel_ratio = window.devicePixelRatio;
+
+		if (pixel_ratio == undefined)
+			pixel_ratio = 1;
+
 		return {
 			user_agent: window.navigator.userAgent,
 			platform: window.navigator.platform,
-			browser: window.navigator.appCodeName,
+			browser: window.navigator.appName,
 			vendor: window.navigator.vendor,
-			pixel_ratio: window.devicePixelRatio,
-			resolution: screen.width + 'x' +  screen.height,
-                        // lower case to avoid different stats for the same language
-			language: window.navigator.language.toLowerCase()
-			iphone_version: MOBILE_STATS.COUNT.getIphoneVersion(window.navigator.userAgent),
+			pixel_ratio: pixel_ratio,
+			resolution: (screen.width * pixel_ratio) + 'x' +  (screen.height * pixel_ratio),
+            // lower case to avoid different stats for the same language
+			language: (window.navigator.language || window.navigator.browserLanguage || '').toLowerCase(),
+			ios_version: MOBILE_STATS.COUNT.getIphoneVersion(window.navigator.userAgent),
 			android_version: MOBILE_STATS.COUNT.getAndroidVersion(window.navigator.userAgent)
 		}
 	},
@@ -74,7 +79,7 @@ MOBILE_STATS.COUNT = {
 			}
 		}
 
-		MOBILE_STATS.COUNT.containers.sendStatus.html(status)
+		MOBILE_STATS.COUNT.containers.sendStatus.html(status);
 	},
 
 	setStatusMessage: function(key)
@@ -104,7 +109,7 @@ MOBILE_STATS.COUNT = {
 			}
 		}).done(function(data)
 		{
-			MOBILE_STATS.COUNT.setStatusMessage(data.message)
+			MOBILE_STATS.COUNT.setStatusMessage(data.message);
 		}).fail(function(data)
 		{
 			MOBILE_STATS.COUNT.setStatusMessage('fail');

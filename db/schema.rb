@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618203226) do
+ActiveRecord::Schema.define(:version => 20130620004605) do
 
   create_table "stat_data", :force => true do |t|
     t.string   "event_name"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(:version => 20130618203226) do
     t.string   "language"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "iphone_version"
+    t.string   "ios_version"
     t.string   "android_version"
   end
 
