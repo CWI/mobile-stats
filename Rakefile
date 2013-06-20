@@ -4,4 +4,8 @@
 
 require File.expand_path('../config/application', __FILE__)
 
+# Load Application Tasks
 MobileStats::Application.load_tasks
+
+# Define Default Task to Run All
+task :default => [:spec, 'jasmine:headless', :cucumber]
