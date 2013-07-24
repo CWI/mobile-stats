@@ -21,6 +21,7 @@ end
 
 # Development, Test
 group :development, :test do
+  gem 'coveralls', require: false
   gem 'sqlite3'
   gem 'rspec'
   gem 'rspec-rails'
