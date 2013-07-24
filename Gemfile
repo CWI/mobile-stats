@@ -21,7 +21,6 @@ end
 
 # Development, Test
 group :development, :test do
-  gem 'coveralls', require: false
   gem 'sqlite3'
   gem 'rspec'
   gem 'rspec-rails'
@@ -37,6 +36,7 @@ end
 
 # Test
 group :test do
+  gem 'coveralls', require: false
   gem 'cucumber'
   gem 'cucumber-rails', require: false
   gem 'capybara-webkit'
