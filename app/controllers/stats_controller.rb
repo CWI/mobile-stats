@@ -18,28 +18,9 @@ class StatsController < ApplicationController
   end
 
   def report_data
-    property = params[:property]
-
-    @stat_data = StatData.select("  count(*) as total_stats 
-								  , #{property} as property_value")
-	   				      .where('event_name = ?', params[:event_name])
-					      .where(property + " is not null")
-					      .where(property + " != '' and ('#{property}' != 'android_version' or '#{property}' != 'ios_version')") 
-					      .group(property)
-					      .order('total_stats desc')
-
-    @stat_data = @stat_data.collect do |i|
-      i.perc = ((i.total_stats.to_f / StatData.all.count.to_f) * 100.0).round
-      i
-    end
-
-    render :json => @stat_data.map { |stats| 
-	{
-			:total_stats => Integer(stats.total_stats), 
-			:perc => stats.perc.to_f.round, 
-			:property_value => stats.property_value
-		} 
-	}
+    @stat_data = StatData.report_data params[:event_name], params[:property]
+    total_records = StatData.total_records @stat_data
+    render :json => @stat_data.map { |stats| { total_stats: Integer(stats.total_stats), perc: stats.perc(total_records), property_value: stats.property_value } }
   end
 
   def qrcode

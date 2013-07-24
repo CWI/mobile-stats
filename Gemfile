@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
   gem 'pry'
+  gem 'pry-nav'
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'factory_girl_rails'
