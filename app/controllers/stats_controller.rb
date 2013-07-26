@@ -33,7 +33,7 @@ class StatsController < ApplicationController
       @stat_data.event_name = params[:event_name]
       @stat_data.ip_address = request.remote_ip
 
-      render :json => {message: _saveStatData}
+      render :json => {message: save_stat_data}
     end
   end
 
@@ -51,8 +51,8 @@ class StatsController < ApplicationController
 
   private
 
-  def _saveStatData
-  all_events = {}
+  def save_stat_data
+    all_events = {}
     if cookies[:sent_count_stats]
     all_events = Marshal.load(cookies[:sent_count_stats])
     end
