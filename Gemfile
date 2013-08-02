@@ -5,6 +5,7 @@ ruby '2.0.0'
 
 # Gems
 gem 'rails', '3.2.13'
+gem 'coveralls', require: false
 
 # Assets
 group :assets do

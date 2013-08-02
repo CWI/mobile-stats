@@ -2,9 +2,11 @@
 
 App used for live mobile stats generation and presentation
 
-[![Build Status](https://travis-ci.org/CWI/mobile-stats.png?branch=master)](https://travis-ci.org/CWI/mobile-stats)
+[![Build Status](https://travis-ci.org/rgarbin/mobile-stats.png?branch=master)](https://travis-ci.org/rgarbin/mobile-stats)
 
 [![Code Climate](https://codeclimate.com/github/CWI/mobile-stats.png)](https://codeclimate.com/github/CWI/mobile-stats)
+
+[![Coverage Status](https://coveralls.io/repos/rgarbin/mobile-stats/badge.png)](https://coveralls.io/r/rgarbin/mobile-stats)
 
 # setup
 
