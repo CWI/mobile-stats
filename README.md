@@ -30,4 +30,4 @@ App used for live mobile stats generation and presentation
 
   `rails s`
 
-6. Happy coding :)
+6. Happy coding, have fun :)
