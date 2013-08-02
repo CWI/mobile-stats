@@ -1,1 +1,1 @@
-rvm --create 1.9.3@mobilestats
+rvm use 2.0.0@mobilestats --create

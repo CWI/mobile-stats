@@ -18,35 +18,9 @@ class StatsController < ApplicationController
   end
 
   def report_data
-    property = params[:property]
-
-    if (property == "android_version" or property == "ios_version")
-      # if don't have device version for android or iphone, then remove of query 
-      @stat_data = StatData.select("count(*) as total_stats, #{property} as property_value")
-                           .where('event_name = ?', params[:event_name])
-                           .where(property + " is not null")
-                           .where(property + " != ''")
-                           .group(property)
-                           .order('total_stats desc')
-    else
-      @stat_data = StatData.select("count(*) as total_stats, #{property} as property_value")
-                           .where('event_name = ?', params[:event_name])
-                           .group(property)
-                           .order('total_stats desc')
-    end
-
-    total_records = 0
-
-    @stat_data.each do |i|
-      total_records += Integer(i.total_stats)
-    end
-
-    @stat_data = @stat_data.collect do |i|
-      i.perc = ((i.total_stats.to_f / total_records.to_f) * 100.0).round
-      i
-    end
-
-    render :json => @stat_data.map { |stats| {:total_stats => Integer(stats.total_stats), :perc => stats.perc, :property_value => stats.property_value} }
+    @stat_data = StatData.report_data params[:event_name], params[:property]
+    total_records = StatData.total_records @stat_data
+    render :json => @stat_data.map { |stats| { total_stats: Integer(stats.total_stats), perc: stats.perc(total_records), property_value: stats.property_value } }
   end
 
   def qrcode
@@ -59,7 +33,7 @@ class StatsController < ApplicationController
       @stat_data.event_name = params[:event_name]
       @stat_data.ip_address = request.remote_ip
 
-      render :json => {message: _saveStatData}
+      render :json => {message: save_stat_data}
     end
   end
 
@@ -77,8 +51,8 @@ class StatsController < ApplicationController
 
   private
 
-  def _saveStatData
-  all_events = {}
+  def save_stat_data
+    all_events = {}
     if cookies[:sent_count_stats]
     all_events = Marshal.load(cookies[:sent_count_stats])
     end
