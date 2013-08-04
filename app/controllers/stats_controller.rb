@@ -4,7 +4,9 @@ class StatsController < ApplicationController
   layout :resolve_layout
 
   def index
-    if params[:event_name]
+    if request.post? and params[:event_name].empty?
+      flash.now[:error] = "Informe o nome do evento para coletar as estatisticas"
+    elsif params[:event_name]
       slug_string = slug params[:event_name]
       redirect_to report_url slug_string, 'vendor'
     end
