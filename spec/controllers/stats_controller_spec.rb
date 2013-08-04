@@ -14,6 +14,12 @@ describe StatsController do
       post :index, event_name: 'xxx'
       response.should redirect_to('/xxx/report/vendor')
     end
+
+    it 'invalid params' do
+      post :index, event_name: ''
+      flash.should_not be_nil
+      response.should render_template(:action=> "index")
+    end
   end
 
   describe 'report_redirect' do
